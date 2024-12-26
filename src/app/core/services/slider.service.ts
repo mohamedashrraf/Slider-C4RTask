@@ -12,8 +12,7 @@ export class SliderService {
   private apiUrl = environment.apiKey;
   http = inject(HttpClient)
 
-  // Fetch the slider data from API
   getSliderData(): Observable<Slider[]> {
-    return this.http.get<Slider[]>(`${this.apiUrl}sliders`); // Assuming API endpoint is /sliders
+    return this.http.get<Slider[]>(`${this.apiUrl}sliders`); 
   }
 }
