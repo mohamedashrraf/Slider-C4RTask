@@ -1,0 +1,55 @@
+<main class="base"    [style.background]="currentBackground">
+  <div class="container mt-5 mt-lg-0">
+    <owl-carousel-o [options]="customOptions"    #carousel   >
+      @if(sliderData$ | async ){
+        @for(slide of SliderData   ;track slide.id; let idx = $index){
+          <ng-template      carouselSlide [id]="slide.id"  >
+            <div class="row"  >
+              <div class="col-12 col-lg-6 col-md-6 mb-5 mb-lg-0 ">
+                <div class="imgholder"  >
+                  <img [src]="slide.image" [alt]="slide.miniTitle" [title]="slide.miniTitle" class="bigimg"  >
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 col-md-6 " dir="auto">
+                  <div class="uppersection" data-aos="slide-up" >
+
+                   <p class="location">
+                    <i class="pi pi-map-marker mx-2"></i>
+                     {{slide.location}}
+                   </p>
+                   <h1 class="title">
+                     {{slide.title}}
+                   </h1>
+                 </div>
+                <div class="line"></div>
+                <div class="lowersection" data-aos="slide-down">
+                  <p class="description">
+                    {{slide.discription}}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </ng-template>
+
+      }
+      }
+    </owl-carousel-o>
+    <div class="row d-none d-lg-block d-md-block">
+      <div class="col-12 mt-5">
+        <div class="custom-dots" dir="auto">
+          @for(slide of SliderData ;track slide.id; let idx = $index){
+            <div class="dot" [ngClass]="{'active': slide.id === SliderData[currentSlideIndex].id}" (click)="changeSlide(slide.id)">
+              <div class="miniholder">
+                <img [src]="slide.image" [alt]="slide.miniTitle" [title]="slide.miniTitle" class="miniimg" [ngClass]="{'grayscale': slide.id !== SliderData[currentSlideIndex].id}">
+              </div>
+              <p class="miniTitle"> {{slide.miniTitle}}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
